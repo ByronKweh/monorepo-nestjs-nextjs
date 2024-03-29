@@ -9,7 +9,7 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import { PetsModule } from './pets/pets.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OwnersModule } from './owners/owners.module';
-import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -27,11 +27,12 @@ import { AuthModule } from './auth/auth.module';
     }),
     JwtModule.register({
       secret: 'YOUR_SECRET_KEY', // Use an environment variable or config service
+      secretOrPrivateKey: 'ANOTHER_SECRET_KEY',
       signOptions: { expiresIn: '60s' }, // Set the token expiration
     }),
     PetsModule,
     OwnersModule,
-    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver, JwtService],

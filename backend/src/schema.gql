@@ -16,6 +16,16 @@ type Pet {
   owner: Owner!
 }
 
+type User {
+  id: Int!
+  username: String!
+  password: String!
+}
+
+type LoginOutput {
+  access_token: String!
+}
+
 type Query {
   hello: String!
   someMutation: String!
@@ -23,6 +33,7 @@ type Query {
   getPet(id: Int!): Pet!
   owners: [Owner!]!
   owner(id: Int!): Owner!
+  user(id: Int!): User!
 }
 
 type Mutation {
@@ -30,6 +41,10 @@ type Mutation {
   createOwner(createOwnerInput: CreateOwnerInput!): Owner!
   updateOwner(updateOwnerInput: UpdateOwnerInput!): Owner!
   removeOwner(id: Int!): Owner!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  login(loginInput: LoginInput!): LoginOutput!
 }
 
 input CreatePetInput {
@@ -45,4 +60,20 @@ input CreateOwnerInput {
 input UpdateOwnerInput {
   name: String
   id: Int!
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  username: String
+  password: String
+  id: Int!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
 }
